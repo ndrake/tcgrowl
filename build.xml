@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<project name="tcgrowl" default="compile" basedir=".">
+	<property name="src" value="./src"/>
+	<property name="build" value="./build"/>
+	<property name="dist" value="./dist"/>
+	<property name="compile.debug" value="true"/>
+	
+	<property name="tc.home" value="/usr/local/TeamCity"/>
+	<property name="deploy.dir" value="${tc.home}/webapps/ROOT/WEB-INF/lib"/>
+
+	<path id="compile.classpath">
+		<fileset dir="${deploy.dir}">
+			<include name="*.jar"/>
+			<exclude name="binaryblizzard.jar"/>
+		</fileset>
+		<fileset dir="lib">
+		    <include name="binaryblizzard.jar"/>
+	    </fileset>
+	</path>
+
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" 
+               destdir="${build}"
+               debug="${compile.debug}"
+               source="1.5">
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+
+
+	<target name="init">
+		<mkdir dir="${build}"/>
+		<mkdir dir="${dist}"/>
+	</target>
+
+	<target name="dist" depends="compile">
+		
+		<jar destfile="${dist}/tcgrowl.jar" basedir="build">
+			<metainf dir="META-INF">
+			   <include name="*"/>
+			</metainf>
+		</jar>
+  
+  	</target>
+	
+	<target name="deploy" depends="dist">
+		<copy file="${dist}/tcgrowl.jar" tofile="${deploy.dir}/tcgrowl.jar"/>
+	</target>
+
+	<target name="clean" description="Removes previous build">
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+	</target>
+
+</project>
+
