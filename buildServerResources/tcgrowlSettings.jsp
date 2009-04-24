@@ -16,25 +16,21 @@
         }
     
         BS.ajaxRequest($('growlTestForm').action, {
-          parameters: 'growlServer='+ gs.value + (gp&&gp.value.length>0?'&growlPassword='+gp.value+'&':'&')+'growlTestMessage='+gm,
-          onComplete: function(transport) {
-            if (transport.responseXML) {
-              BS.XMLResponse.processErrors(transport.responseXML, {
-                onProfilerProblemError: function(elem) {
-                  alert(elem.firstChild.nodeValue);
-                }
-              });
+            parameters: 'growlServer='+ gs.value + (gp&&gp.value.length>0?'&growlPassword='+gp.value+'&':'&')+'growlTestMessage='+gm,
+            onComplete: function(transport) {
+              if (transport.responseXML) {
+                  $('tcGrowlTest').refresh();
+              }             
             }
-            
-          }
         });
         return false;        
     }
 </script>
 
-
+<bs:refreshable containerId="tcGrowlTest" pageUrl="${pageUrl}">
 <bs:messages key="tcgrowlMessage"/>
 
 <form action="/tcgrowlSettings.html" method="post" id="growlTestForm">
 Send test message to Growl server: <input id="growlTestMessage" name="growlTestMessage" type="text" />  <input type="button" name="Test" value="Test" onclick="return sendTest();"/>
 </form>
+</bs:refreshable>

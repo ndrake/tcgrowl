@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import jetbrains.buildServer.controllers.ActionErrors;
 import jetbrains.buildServer.controllers.AjaxRequestProcessor;
 import jetbrains.buildServer.controllers.BaseController;
+import jetbrains.buildServer.controllers.XmlResponseUtil;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.web.openapi.WebControllerManager;
 import jetbrains.buildServer.web.openapi.WebResourcesManager;
@@ -25,8 +26,13 @@ import com.binaryblizzard.growl.GrowlRegistrations;
 
 
 /**
-    * Controller to handle test form on TCGrowl Settings page.
-    */
+ * Controller to handle test form on TCGrowl Settings page.
+ * 
+ * Based on the TC Profiler plugin controller. 
+ *   http://www.jetbrains.net/confluence/display/TW/Server+Profiling
+ * 
+ * @author Nathanial Drake
+ */
 public class TCGrowlSettingsController extends BaseController {
 
     public TCGrowlSettingsController(final SBuildServer server, WebControllerManager manager,
@@ -46,7 +52,6 @@ public class TCGrowlSettingsController extends BaseController {
         new AjaxRequestProcessor().processRequest(request, response, new AjaxRequestProcessor.RequestHandler() {
             public void handleRequest(final HttpServletRequest request, final HttpServletResponse response, final Element xmlResponse) {
                 try {
-                    System.out.println("#$ in doHandle...");
                     doAction(request);
                 } catch (Exception e) {
                     Loggers.SERVER.warn(e);
