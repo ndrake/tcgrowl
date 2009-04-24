@@ -2,7 +2,8 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans default-autowire="constructor">
-  <bean id="tcGrowlNotifier"
-        class="net.slimeslurp.tcgrowl.GrowlNotifier"/>
-
+  <bean id="tcGrowlNotifier" class="net.slimeslurp.tcgrowl.GrowlNotifier"/>
+  <bean id="tcGrowlSettingsPage" class="net.slimeslurp.tcgrowl.TCGrowlSettingsExtension"/>
+  <bean id="profilerController" class="net.slimeslurp.tcgrowl.TCGrowlSettingsController"/>
+        
 </beans>

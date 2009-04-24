@@ -40,7 +40,7 @@ public class GrowlNotifier implements Notificator {
     private static final String TYPE = "tcGrowlNotifier";
     private static final String GROWL_SERVER_KEY = "tcgrowl.gServer";
     private static final String GROWL_PASSWORD_KEY = "tcgrowl.gPassword";
-    private static final String APP_NAME = "Team City";
+    public static final String APP_NAME = "Team City";
         
     private static final PropertyKey SERVER_KEY = new NotificatorPropertyKey(TYPE, GROWL_SERVER_KEY);
     private static final PropertyKey PASSWORD_KEY = new NotificatorPropertyKey(TYPE, GROWL_PASSWORD_KEY);

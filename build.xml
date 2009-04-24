@@ -5,16 +5,19 @@
 	<property name="dist" value="./dist"/>
 	<property name="compile.debug" value="true"/>
 	
-	<property name="tc.home" value="/usr/local/TeamCity"/>
-	<property name="deploy.dir" value="${tc.home}/webapps/ROOT/WEB-INF/lib"/>
+	<property name="tc.home" value="/Users/ndrake/bin/TeamCity"/>
+	<property name="tc.data.dir" value="/Users/ndrake/.BuildServer"/>
+	<property name="tc.lib" value="${tc.home}/webapps/ROOT/WEB-INF/lib"/>
+	<property name="deploy.dir" value="${tc.data.dir}/plugins"/>
 
 	<path id="compile.classpath">
-		<fileset dir="${deploy.dir}">
+		<fileset dir="${tc.lib}">
 			<include name="*.jar"/>
 			<exclude name="binaryblizzard.jar"/>
 		</fileset>
 		<fileset dir="lib">
 		    <include name="binaryblizzard.jar"/>
+		    <include name="j2ee.jar"/>
 	    </fileset>
 	</path>
 
@@ -36,6 +39,10 @@
 
 	<target name="dist" depends="compile">
 		
+		<copy todir="${build}/buildServerResources">
+		    <fileset dir="buildServerResources"/>
+	    </copy>
+		
 		<jar destfile="${dist}/tcgrowl.jar" basedir="build">
 			<metainf dir="META-INF">
 			   <include name="*"/>
@@ -45,7 +52,12 @@
   	</target>
 	
 	<target name="deploy" depends="dist">
-		<copy file="${dist}/tcgrowl.jar" tofile="${deploy.dir}/tcgrowl.jar"/>
+
+	    <copy file="lib/binaryblizzard.jar" todir="${dist}"/>
+	        
+	    <zip destfile="${dist}/tcgrowl.zip" basedir="${dist}" includes="*.jar"/>
+	    
+		<copy file="${dist}/tcgrowl.zip" todir="${deploy.dir}"/>
 	</target>
 
 	<target name="clean" description="Removes previous build">
