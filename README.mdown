@@ -1,0 +1,21 @@
+# Introduction #
+
+This package is a [http://www.jetbrains.com/teamcity/ TeamCity] plugin to allow users to receive build notifications via [http://growl.info Growl]/[http://homepage.mac.com/stevevm/JGrowl/JGrowl.tar.gz JGrowl].
+
+# Prerequisites # 
+
+  * The tcgrowl jar
+  * The JGrowl jar (binaryblizzard.jar)
+  * [http://growl.info Growl (Mac OS X only)] or [http://homepage.mac.com/stevevm/JGrowl/JGrowl.tar.gz JGrowl (Linux/Windows)]
+
+# Installation #
+ 
+  * Follow pre-4.0 plugin installation instructions from here: http://confluence.jetbrains.net/display/TCD6/Installing+Additional+Plugins
+  ** Both tcgrowl.jar and binaryblizzard.jar are required
+  * On your [http://www.jetbrains.com/teamcity/ TeamCity] user setting page setup the ip address where Growl/JGrowl is listening and a password if you have one set
+  * Edit your notification settings for Growl Notifier
+
+If you use Growl:
+  * Make sure the following settings are enabled in Growl's Network preferences:
+    * "Listen for incoming notifications"
+    * "Allow remote application registration"
